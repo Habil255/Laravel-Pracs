@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Models\Lecturer;
 use Illuminate\Http\Request;
 
-class ApiTestController extends Controller
+class LecturersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getStudents()
+    public function index()
     {
         //
-        $student=Student::all();
-
-        return response()->json($student);
+        return view("lecturer_reg");
     }
 
     /**
@@ -25,16 +23,9 @@ class ApiTestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createStudent(Request $request)
+    public function create()
     {
         //
-        $student = new Student();
-        $student->name = $request->name;
-        $student->course = $request->course;
-        $student->save();
-        return response()->json([
-            "message"=> "Student Created Successfully"
-        ], 201);
     }
 
     /**
@@ -43,9 +34,18 @@ class ApiTestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeStudent(Request $request)
+    public function store(Request $request)
     {
-        //
+        
+        $details= new Lecturer();
+        $details ->name=$request['name'];
+        $details ->phonenumber=$request['phonenumber'];
+        $details ->email=$request['email'];
+        $details ->yr_of_acc=$request['yr_of_acc'];
+        $details ->area_of_study=$request['area_of_study'];
+        $details ->dob=$request['dob'];
+        $details->save();
+        return "Details saved successfully";
     }
 
     /**
@@ -54,11 +54,12 @@ class ApiTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showStudent($id)
+    public function show()
     {
         //
-        $student =Student::findOrFail($id);
-         return response()->json($student,'200');
+        $lecturers=Lecturer::all();
+        info($lecturers);
+        return view('lecturer_details',compact('lecturers'));
     }
 
     /**
@@ -67,7 +68,7 @@ class ApiTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editStudent($id)
+    public function edit($id)
     {
         //
     }
@@ -79,7 +80,7 @@ class ApiTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateStudent(Request $request, $id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,7 +91,7 @@ class ApiTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyStudent($id)
+    public function destroy($id)
     {
         //
     }

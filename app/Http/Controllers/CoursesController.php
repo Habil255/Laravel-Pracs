@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
 use Illuminate\Http\Request;
-
-class ApiTestController extends Controller
+use App\Models\Lecturer;
+class CoursesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getStudents()
+    public function index()
     {
         //
-        $student=Student::all();
-
-        return response()->json($student);
+        return view('courses_reg');
     }
 
     /**
@@ -25,16 +22,9 @@ class ApiTestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createStudent(Request $request)
+    public function create()
     {
         //
-        $student = new Student();
-        $student->name = $request->name;
-        $student->course = $request->course;
-        $student->save();
-        return response()->json([
-            "message"=> "Student Created Successfully"
-        ], 201);
     }
 
     /**
@@ -43,9 +33,12 @@ class ApiTestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeStudent(Request $request)
+    public function store(Request $request, $id)
     {
         //
+        
+        // $lecturer = Lecturer::findOrFail($id);
+        // $course=new Course();
     }
 
     /**
@@ -54,11 +47,14 @@ class ApiTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showStudent($id)
+    public function search(Request $request)
     {
         //
-        $student =Student::findOrFail($id);
-         return response()->json($student,'200');
+        $student = Lecturer::select("name")
+                    ->where("name","LIKE","%{$request->value}%")
+                    ->limit(8)
+                    ->get();
+        return response()->json($student);
     }
 
     /**
@@ -67,7 +63,7 @@ class ApiTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editStudent($id)
+    public function edit($id)
     {
         //
     }
@@ -79,7 +75,7 @@ class ApiTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateStudent(Request $request, $id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,7 +86,7 @@ class ApiTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyStudent($id)
+    public function destroy($id)
     {
         //
     }

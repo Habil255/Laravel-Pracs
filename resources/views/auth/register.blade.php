@@ -24,6 +24,19 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="username" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -61,6 +74,19 @@
                             </div>
                         </div>
 
+                        {{-- Checkboxes for the roles --}}
+                        <p>Assign a role:</p>
+
+                        <span><div>
+                          <input type="checkbox" id="scales" name="scales1"
+                                 checked>
+                          <label for="scales">Super Admin</label>
+                        </div>
+                        <div>
+                          <input type="checkbox" id="scales" name="scales2"
+                                 checked>
+                          <label for="scales">Admin</label>
+                        </div></span>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -64,5 +64,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt' => \App\Http\Middleware\CheckJWT::class,
+
+        // the Codes to check if the User login according to Role
+        'admin'=>\App\Http\Middleware\Admin::class,
+        'staff'=>\App\Http\Middleware\Staff::class,
+        'student'=>\App\Http\Middleware\Student::class,
     ];
 }

@@ -79,8 +79,9 @@
     $('input.typeahead').typeahead({
         source:function(value,process){
             return $.get(url,{value:value}, function(data){
+                alert(data);
                 console.log(data);
-                // return process(data);    
+                // return process(data);
             });
         } 
         });
